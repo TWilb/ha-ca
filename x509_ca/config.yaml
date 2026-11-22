@@ -1,0 +1,43 @@
+name: X.509 Certificate Issuer
+version: "1.1.0"
+slug: x509_ca
+description: Issue X.509 certificates signed by your own CA certificate and key
+url: https://github.com/TWilb/ha-ca
+arch:
+  - aarch64
+  - amd64
+init: false
+startup: application
+boot: auto
+homeassistant_api: true
+hassio_api: true
+hassio_role: manager
+ingress: true
+ingress_port: 8099
+panel_icon: mdi:certificate
+panel_title: Certificates
+map:
+  - type: ssl
+    read_only: false
+  - type: share
+    read_only: true
+options:
+  ca_cert: /ssl/ca/ca.crt
+  ca_key: /ssl/ca/ca.key
+  ca_key_password: ""
+  default_days: 365
+  default_key_type: ec-p256
+  default_profile: server
+  renew_days_before: 30
+  renew_with_new_key: true
+  notifications: true
+schema:
+  ca_cert: str
+  ca_key: str
+  ca_key_password: password?
+  default_days: int(1,3650)
+  default_key_type: list(ec-p256|ec-p384|rsa-2048|rsa-3072|rsa-4096|ed25519)
+  default_profile: list(server|client|server+client)
+  renew_days_before: int(1,365)
+  renew_with_new_key: bool
+  notifications: bool
